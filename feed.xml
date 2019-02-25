@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-02-25T22:14:51+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">打不死的小芳</title><subtitle>Git</subtitle><entry><title type="html">Gitgraph Hello World!!</title><link href="http://localhost:4000/javascript/2019/02/25/gitgraph-helloworld.html" rel="alternate" type="text/html" title="Gitgraph Hello World!!" /><published>2019-02-25T15:52:57+08:00</published><updated>2019-02-25T15:52:57+08:00</updated><id>http://localhost:4000/javascript/2019/02/25/gitgraph-helloworld</id><content type="html" xml:base="http://localhost:4000/javascript/2019/02/25/gitgraph-helloworld.html">&lt;p&gt;花了兩個小時的時間，終於弄好了，作完整個胃酸上升，喝口水，休息一下。&lt;/p&gt;
+&lt;p&gt;&lt;b&gt;劇本一&lt;/b&gt;：開發團隊在 Git 做了初始 Commit，架構師 Mark Wong 根據 git branch 分支模型，開了一個&lt;br /&gt;
+develop 分支，分支由 master 切換到 develop，然後把開發好的一支測試程式加到 Git 儲存庫 (Commit)。&lt;/p&gt;
+&lt;p&gt;&lt;canvas id=&quot;gitGraph&quot;&gt;&lt;/canvas&gt;&lt;/p&gt;
+
+&lt;script type=&quot;text/javascript&quot;&gt;
+  var gitgraph = new GitGraph({
+      orientation:&quot;vertical-reverse&quot;
+    });
+  var master = gitgraph.branch(&quot;master&quot;);
+  master.commit({
+    sha1:&quot;1525d61&quot;,
+    message:&quot;init commit.&quot;,
+    author:&quot;mark_wong@gss.com.tw&quot;
+  });
+  var develop = master.branch(&quot;develop&quot;);
+  develop.checkout();
+  develop.commit({
+    sha1:&quot;???????&quot;,
+    message:&quot;create new branch - develop&quot;,
+    author:&quot;mark_wong@gss.com.tw&quot;
+  });
+&lt;/script&gt;
+
+&lt;p&gt;&lt;b&gt;劇本二&lt;/b&gt;：開發團隊在 develop 分支上另外又寫了一支測試程式，然後加到 Git 儲存庫 (Commit)。&lt;/p&gt;
+&lt;canvas id=&quot;gitGraph2&quot;&gt;&lt;/canvas&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+  var gitgraph = new GitGraph({
+      orientation:&quot;vertical-reverse&quot;,
+      elementId:&quot;gitGraph2&quot;
+    });
+  var master = gitgraph.branch(&quot;master&quot;);
+  master.commit({
+    sha1:&quot;1525d61&quot;,
+    message:&quot;init commit.&quot;,
+    author:&quot;mark_wong@gss.com.tw&quot;
+  });
+  var develop = master.branch(&quot;develop&quot;);
+  develop.checkout();
+  develop.commit({
+    sha1:&quot;1d8145e&quot;,
+    message:&quot;create new branch - develop&quot;,
+    author:&quot;mark_wong@gss.com.tw&quot;
+  });
+  develop.commit({
+    sha1:&quot;4fe2826&quot;,
+    message:&quot;模擬新增測試程式&quot;,
+    author:&quot;mark_wong@gss.com.tw&quot;
+  });
+&lt;/script&gt;</content><author><name></name></author><summary type="html">花了兩個小時的時間，終於弄好了，作完整個胃酸上升，喝口水，休息一下。 劇本一：開發團隊在 Git 做了初始 Commit，架構師 Mark Wong 根據 git branch 分支模型，開了一個 develop 分支，分支由 master 切換到 develop，然後把開發好的一支測試程式加到 Git 儲存庫 (Commit)。</summary></entry><entry><title type="html">測試!</title><link href="http://localhost:4000/jekyll/update/2019/02/25/test.html" rel="alternate" type="text/html" title="測試!" /><published>2019-02-25T13:52:57+08:00</published><updated>2019-02-25T13:52:57+08:00</updated><id>http://localhost:4000/jekyll/update/2019/02/25/test</id><content type="html" xml:base="http://localhost:4000/jekyll/update/2019/02/25/test.html">&lt;p&gt;昨天我的blog 還可以看，怎麼今天就Git Ha 了- 404 file not found &amp;gt;&amp;lt;
+我今天才要開始運用它來做事耶，恩，先做一頁再上傳一次看看，這頁
+就是測試用的頁。我是打不死的小….芳。&lt;/p&gt;</content><author><name></name></author><summary type="html">昨天我的blog 還可以看，怎麼今天就Git Ha 了- 404 file not found &amp;gt;&amp;lt; 我今天才要開始運用它來做事耶，恩，先做一頁再上傳一次看看，這頁 就是測試用的頁。我是打不死的小….芳。</summary></entry><entry><title type="html">Welcome to Jekyll!</title><link href="http://localhost:4000/jekyll/update/2019/02/24/welcome-to-jekyll.html" rel="alternate" type="text/html" title="Welcome to Jekyll!" /><published>2019-02-24T23:24:57+08:00</published><updated>2019-02-24T23:24:57+08:00</updated><id>http://localhost:4000/jekyll/update/2019/02/24/welcome-to-jekyll</id><content type="html" xml:base="http://localhost:4000/jekyll/update/2019/02/24/welcome-to-jekyll.html">&lt;p&gt;You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
+
+&lt;p&gt;To add new posts, simply add a file in the &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory that follows the convention &lt;code class=&quot;highlighter-rouge&quot;&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt; and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
+
+&lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Tom'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints 'Hi, Tom' to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Check out the &lt;a href=&quot;https://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;</content><author><name></name></author><summary type="html">You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run jekyll serve, which launches a web server and auto-regenerates your site when a file is updated.</summary></entry></feed>
