@@ -9,41 +9,72 @@ layout: default
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Ye-Fang Wong | Senior AI Solution Architect</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Roboto+Mono&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="{{ '/assets/main.css' | relative_url }}">
   <style>
-    :root { --google-blue: #4285F4; --tech-gray: #5f6368; }
-    body { font-family: 'Inter', sans-serif; color: #202124; line-height: 1.6; }
-    .wrapper { max-width: 900px; }
-    .hero { padding: 60px 0; border-bottom: 1px solid #eee; }
-    .hero h1 { color: var(--google-blue); font-size: 2.5em; margin-bottom: 10px; }
-    .hero p { font-size: 1.2em; color: var(--tech-gray); }
-    .badge { background: #e8f0fe; color: var(--google-blue); padding: 4px 12px; border-radius: 16px; font-size: 0.85em; font-weight: bold; margin-right: 8px; }
-    .project-card { border: 1px solid #dadce0; border-radius: 8px; padding: 24px; margin: 20px 0; transition: 0.3s; }
-    .project-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-    .code-font { font-family: 'Roboto Mono', monospace; background: #f8f9fa; padding: 2px 6px; }
+    :root { --google-blue: #4285F4; --tech-gray: #5f6368; --bg-light: #f8f9fa; }
+    body { font-family: 'Inter', sans-serif; color: #202124; line-height: 1.6; background-color: #fff; margin: 0; }
+    .wrapper { max-width: 900px; margin: 0 auto; padding: 0 20px; box-sizing: border-box; }
+    
+    /* Header 導航欄 RWD */
+    .site-header { padding: 25px 0; border-bottom: 1px solid #eee; background: #fff; }
+    .header-container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+    .site-title { font-weight: 700; color: var(--google-blue) !important; text-decoration: none; font-size: 1.4em; letter-spacing: -0.5px; }
+    .nav-group { display: flex; align-items: center; gap: 12px; }
+
+    /* Hero Section */
+    .hero { padding: 80px 0 60px; border-bottom: 1px solid #eee; }
+    .hero h1 { font-size: 2.8em; margin-bottom: 15px; color: #202124; line-height: 1.2; }
+    .hero p { font-size: 1.25em; color: var(--tech-gray); max-width: 750px; margin-bottom: 25px; }
+    .hero-badges { display: flex; flex-wrap: wrap; gap: 10px; }
+
+    /* 通用元件 */
+    .badge { background: #e8f0fe; color: var(--google-blue); padding: 6px 16px; border-radius: 20px; font-size: 0.85em; font-weight: 700; text-decoration: none; display: inline-block; }
+    .badge-outline { background: transparent; border: 1.5px solid var(--google-blue); }
+    
+    .project-card { border: 1px solid #dadce0; border-radius: 12px; padding: 28px; margin: 25px 0; transition: all 0.3s ease; background: #fff; display: block; text-decoration: none; color: inherit; }
+    .project-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.08); border-color: var(--google-blue); transform: translateY(-2px); }
+    .project-card h3 { margin: 0 0 12px 0; color: #202124; font-size: 1.4em; display: flex; align-items: center; gap: 10px; }
+    .project-card p { color: #5f6368; margin-bottom: 15px; }
+    .view-link { color: var(--google-blue); font-weight: 700; font-size: 0.95em; }
+
+    /* Technical Logs Section */
+    .home { padding: 60px 0; }
+    .post-list { list-style: none; padding: 0; margin-top: 30px; }
+    .post-list li { margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid #f1f3f4; }
+    .post-meta { font-family: 'Roboto Mono', monospace; color: #70757a; font-size: 0.9em; display: block; margin-bottom: 8px; }
+    .post-link { font-size: 1.3em; font-weight: 700; color: #202124; text-decoration: none; }
+    .post-link:hover { color: var(--google-blue); }
+
+    /* 📱 手機版調整 (RWD) */
+    @media (max-width: 768px) {
+      .header-container { flex-direction: column; text-align: center; gap: 15px; }
+      .nav-group { flex-direction: column; width: 100%; }
+      .hero { padding: 50px 0; text-align: center; }
+      .hero h1 { font-size: 2em; }
+      .hero p { font-size: 1.1em; }
+      .hero-badges { justify-content: center; }
+      .project-card { padding: 20px; }
+      .project-card h3 { font-size: 1.2em; }
+    }
   </style>
 </head>
 <body>
 
-<header class="site-header" role="banner">
-  <div class="wrapper">
-    <a class="site-title" rel="author" href="/">Ye-Fang Wong (翁藝芳)</a>
-    <nav class="site-nav">
-      <div class="trigger">
-        <span class="badge">19+ Years Systems Expert</span>
-        <a class="page-link" href="/about/">About Research</a>
-      </div>
-    </nav>
+<header class="site-header">
+  <div class="wrapper header-container">
+    <a class="site-title" href="/">Ye-Fang Wong</a>
+    <div class="nav-group">
+      <span class="badge">19+ Years Systems Expert</span>
+      <a class="badge badge-outline" href="{{ '/about/' | relative_url }}">About Research</a>
+    </div>
   </div>
 </header>
 
-<main class="page-content" aria-label="Content">
-  <div class="wrapper">
-    
+<main class="wrapper">
     <section class="hero">
       <h1>Architecting Secure AI Futures</h1>
       <p>Senior Solution Architect specializing in <strong>Responsible AI Guardrails</strong> and <strong>Mission-Critical Backend Infrastructures</strong>.</p>
-      <div style="margin-top: 20px;">
+      <div class="hero-badges">
         <span class="badge">Generative AI</span>
         <span class="badge">Text-to-SQL</span>
         <span class="badge">IRNN R&D</span>
@@ -52,24 +83,19 @@ layout: default
     </section>
 
     <section class="projects">
-      <h2>🚀 Featured Technical R&D</h2>
+      <h2 style="margin-top: 50px;">🚀 Featured Technical R&D</h2>
       
-      <div class="project-card">
+      <a href="https://github.com/yefangwong/llm-sql-guard" class="project-card">
         <h3>🛡️ LLM-SQL-Guard</h3>
-        <p>A defense framework designed to eliminate LLM hallucinations and secure Text-to-SQL integration for enterprise data layers. 
-           Implemented semantic validation to prevent SQL injection in financial and manufacturing systems.</p>
-        <a href="https://github.com/yefangwong/llm-sql-guard" style="color: var(--google-blue); font-weight: bold;">View on GitHub →</a>
-      </div>
+        <p>A defense framework designed to eliminate LLM hallucinations and secure Text-to-SQL integration for enterprise data layers. Focuses on semantic validation and injection defense.</p>
+        <span class="view-link">View on GitHub →</span>
+      </a>
 
-      <div class="project-card">
-        <h3>🧠 Neural Networks from Scratch (IRNN/RNN)</h3>
-        <p>Expertise in implementing Recurrent Neural Networks from the ground up. Specialized in <strong>Identity RNNs (IRNN)</strong> to solve gradient issues and <strong>min-char-rnn</strong> for sequence modeling.</p>
-        <ul>
-            <li>Implemented <span class="code-font">BPTT</span> (Backpropagation Through Time) from mathematical derivation.</li>
-            <li>Optimized for character-level predictions and temporal dependency handling.</li>
-        </ul>
-        <a href="https://github.com/yefangwong/min-char-rnn" style="color: var(--google-blue); font-weight: bold;">View RNN Implementation →</a>
-      </div>
+      <a href="https://github.com/yefangwong/min-char-rnn" class="project-card">
+        <h3>🧠 Neural Networks from Scratch (IRNN)</h3>
+        <p>Implementation of <strong>Identity Recurrent Neural Networks (IRNN)</strong> in pure Java. Solves vanishing gradients using BPTT and identity matrix initialization.</p>
+        <span class="view-link">View RNN Implementation →</span>
+      </a>
     </section>
 
     <section class="home">
@@ -78,19 +104,18 @@ layout: default
         {% for post in site.posts %}
           <li>
             <span class="post-meta">{{ post.date | date: "%b %d, %Y" }}</span>
-            <h3><a class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h3>
+            <a class="post-link" href="{{ post.url | relative_url }}">
+              {{ post.title | escape }}
+            </a>
           </li>
         {% endfor %}
       </ul>
     </section>
-
-  </div>
 </main>
 
-<footer class="site-footer">
-  <div class="wrapper">
-    <p><strong>Contact:</strong> <a href="mailto:yefang.wong@gmail.com">yefang.wong@gmail.com</a> | Taipei, Taiwan</p>
-  </div>
+<footer class="wrapper" style="padding: 60px 0 40px; color: var(--tech-gray); font-size: 0.95em; border-top: 1px solid #eee; text-align: center;">
+    <p>Contact: <a href="mailto:yefang.wong@gmail.com" style="color: var(--google-blue); text-decoration: none; font-weight: 700;">yefang.wong@gmail.com</a> | Taipei, Taiwan</p>
+    <p style="margin-top: 10px; font-size: 0.85em;">© 2026 Ye-Fang Wong. Built with Jekyll.</p>
 </footer>
 
 </body>
