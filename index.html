@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Yi-Fang Wong | Senior AI Solution Architect</title>
+  <title>Ye-Fang Wong | Senior AI Solution Architect</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Roboto+Mono&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/main.css">
   <style>
@@ -18,7 +18,6 @@
     .project-card { border: 1px solid #dadce0; border-radius: 8px; padding: 24px; margin: 20px 0; transition: 0.3s; }
     .project-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
     .code-font { font-family: 'Roboto Mono', monospace; background: #f8f9fa; padding: 2px 6px; }
-    .post-meta { font-family: 'Roboto Mono', monospace; color: #70757a; }
   </style>
 </head>
 <body>
@@ -28,7 +27,7 @@
     <a class="site-title" rel="author" href="/">Yi-Fang Wong (翁藝芳)</a>
     <nav class="site-nav">
       <div class="trigger">
-        <span class="badge">19+ Years Experience</span>
+        <span class="badge">19+ Years Systems Expert</span>
         <a class="page-link" href="/about/">About Research</a>
       </div>
     </nav>
@@ -44,30 +43,34 @@
       <div style="margin-top: 20px;">
         <span class="badge">Generative AI</span>
         <span class="badge">Text-to-SQL</span>
-        <span class="badge">JVM Expert</span>
-        <span class="badge">Cloud Architecture</span>
+        <span class="badge">IRNN R&D</span>
+        <span class="badge">Deep Learning</span>
       </div>
     </section>
 
     <section class="projects">
-      <h2>🚀 Key Research & Projects</h2>
+      <h2>🚀 Featured Technical R&D</h2>
       
       <div class="project-card">
         <h3>🛡️ LLM-SQL-Guard</h3>
         <p>A defense framework designed to eliminate LLM hallucinations and secure Text-to-SQL integration for enterprise data layers. 
-           Implemented semantic validation to prevent SQL injection in financial core systems.</p>
+           Implemented semantic validation to prevent SQL injection in financial and manufacturing systems.</p>
         <a href="https://github.com/yefangwong/llm-sql-guard" style="color: var(--google-blue); font-weight: bold;">View on GitHub →</a>
       </div>
 
       <div class="project-card">
-        <h3>🧠 Neural Networks from Scratch (iRNN)</h3>
-        <p>Research on solving the vanishing gradient problem using <span class="code-font">Identity RNNs</span> in pure Java. 
-           Focused on long-sequence data processing without heavy third-party dependencies.</p>
+        <h3>🧠 Neural Networks from Scratch (IRNN/RNN)</h3>
+        <p>Expertise in implementing Recurrent Neural Networks from the ground up. Specialized in <strong>Identity RNNs (IRNN)</strong> to solve gradient issues and <strong>min-char-rnn</strong> for sequence modeling.</p>
+        <ul>
+            <li>Implemented <span class="code-font">BPTT</span> (Backpropagation Through Time) from mathematical derivation.</li>
+            <li>Optimized for character-level predictions and temporal dependency handling.</li>
+        </ul>
+        <a href="https://github.com/yefangwong/min-char-rnn" style="color: var(--google-blue); font-weight: bold;">View RNN Implementation →</a>
       </div>
     </section>
 
     <section class="home">
-      <h2 class="post-list-heading">Technical Logs</h2>
+      <h2 class="post-list-heading">Technical Logs (Archived)</h2>
       <ul class="post-list">
         {% for post in site.posts %}
           <li>
@@ -83,11 +86,7 @@
 
 <footer class="site-footer">
   <div class="wrapper">
-    <div class="footer-col-wrapper">
-      <div class="footer-col">
-        <p><strong>Contact:</strong> <a href="mailto:yefang.wong@gmail.com">yefang.wong@gmail.com</a> | Taipei, Taiwan</p>
-      </div>
-    </div>
+    <p><strong>Contact:</strong> <a href="mailto:yefang.wong@gmail.com">yefang.wong@gmail.com</a> | Taipei, Taiwan</p>
   </div>
 </footer>
 
