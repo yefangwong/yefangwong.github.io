@@ -17,7 +17,7 @@ This repository hosts the official personal website and technical log of **Ye-Fa
 .
 ├── index.html              # Homepage (Hero section, Featured R&D, Technical Logs index)
 ├── about/
-│   └── index.html          # "About My Technical Journey" (Career evolution & R&D milestones)
+│   └── index.html          # "About Research" (Career evolution & R&D milestones)
 ├── _layouts/
 │   └── post.html           # Universal article layout (MathJax 3, GTM, responsive CSS, typography)
 ├── _posts/                 # Technical Markdown posts (YYYY-MM-DD-title.md)
