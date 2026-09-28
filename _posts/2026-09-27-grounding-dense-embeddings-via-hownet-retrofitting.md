@@ -34,18 +34,32 @@ author: "Ye-Fang Wong (翁藝芳)"
 
 為了客觀量化這一現象，我們在 `token-meaning-lab` 構建了嚴格的四象限語義評測集（參照 Hill et al. 2015 SimLex-999 黃金標準）：
 
-```
-                 ▲ 本體真正相似度 (Genuine Similarity)
-                 │
-      Q3: 概念相同 / 鮮少同框   │   Q1: 概念相同 / 高度同框
-     (如: 企鵝 vs 蜂鳥)         │   (如: 醫生 vs 大夫、爸爸 vs 父親)
-                 │
-─────────────────┼─────────────────► 語境同框率 (Co-occurrence / Relatedness)
-                 │
-      Q4: 概念無關 / 鮮少同框   │   Q2: 概念相異 / 高度同框 (典型盲區)
-     (如: 醫生 vs 香蕉)         │   (如: 醫生 vs 醫院、貓 vs 老鼠)
-                 │
-```
+<div class="quadrant-wrapper">
+  <div class="quadrant-axis-y">▲ 本體真正相似度 (Genuine Ontological Similarity)</div>
+  <div class="quadrant-grid">
+    <div class="quadrant-card q3">
+      <div class="quadrant-title">🔹 Q3: 概念相同 / 鮮少同框</div>
+      <div class="quadrant-desc">跨領域結構同構、真相似但低共現率</div>
+      <span class="quadrant-example">範例：企鵝 vs 蜂鳥、心臟 vs 抽水機</span>
+    </div>
+    <div class="quadrant-card q1">
+      <div class="quadrant-title">⭐ Q1: 概念本質相同 / 高度同框</div>
+      <div class="quadrant-desc"><strong>【核心檢驗：真相似】</strong>本體屬性高度重疊且同框</div>
+      <span class="quadrant-example">範例：醫生 vs 大夫、爸爸 vs 父親</span>
+    </div>
+    <div class="quadrant-card q4">
+      <div class="quadrant-title">⚪ Q4: 概念無關 / 鮮少同框</div>
+      <div class="quadrant-desc">正交底噪對照組、語義本體完全不相干</div>
+      <span class="quadrant-example">範例：醫生 vs 香蕉、雲朵 vs 剪刀</span>
+    </div>
+    <div class="quadrant-card q2">
+      <div class="quadrant-title">⚠️ Q2: 概念相異 / 高度同框</div>
+      <div class="quadrant-desc"><strong>【統計共現陷阱：典型盲區】</strong>同框率極高但本質相異</div>
+      <span class="quadrant-example">範例：醫生 vs 醫院、貓 vs 老鼠</span>
+    </div>
+  </div>
+  <div class="quadrant-axis-x">語境同框率 (Statistical Co-occurrence / Relatedness) ►</div>
+</div>
 
 ### 檢定目標 (Hypothesis)
 * **核心假設**：未經符號知識校準的神經向量模型，在 Q1（真相似）與 Q2（語境同框）上的餘弦相似度分佈無法在統計學上達成顯著分離（$p > 0.05$）。

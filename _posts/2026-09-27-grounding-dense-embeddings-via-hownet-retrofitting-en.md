@@ -33,24 +33,32 @@ When high-stakes AI systems—such as legal compliance, clinical decision suppor
 
 To quantify this entanglement rigorously, we establish an evaluation protocol following the SimLex-999 design philosophy (Hill et al., 2015), organizing concept pairs into four distinct quadrants:
 
-```
-                      High Similarity (Ontological)
-                                  ▲
-                                  │
-            [Quadrant 1]          │          [Quadrant 3]
-       Genuine Similarity         │      Structural Isomorphism
-      (e.g., Doctor / Physician)  │    (e.g., Heart / Water Pump)
-                                  │
-  ◄───────────────────────────────┼───────────────────────────────►
-  Low Co-occurrence               │               High Co-occurrence
-                                  │
-            [Quadrant 4]          │          [Quadrant 2]
-         Orthogonal Noise         │      Contextual Relatedness
-       (e.g., Cloud / Scissors)   │     (e.g., Doctor / Hospital)
-                                  │
-                                  ▼
-                      Low Similarity (Ontological)
-```
+<div class="quadrant-wrapper">
+  <div class="quadrant-axis-y">▲ Genuine Ontological Similarity (Conceptual Meaning)</div>
+  <div class="quadrant-grid">
+    <div class="quadrant-card q3">
+      <div class="quadrant-title">🔹 Q3: Structural Isomorphism</div>
+      <div class="quadrant-desc">High conceptual similarity across distant domains; low empirical co-occurrence.</div>
+      <span class="quadrant-example">Example: Heart vs. Water Pump, Penguin vs. Hummingbird</span>
+    </div>
+    <div class="quadrant-card q1">
+      <div class="quadrant-title">⭐ Q1: Genuine Similarity</div>
+      <div class="quadrant-desc"><strong>[Core Objective]</strong> Shared essential ontological attributes; frequent joint occurrence.</div>
+      <span class="quadrant-example">Example: Doctor vs. Physician, Father vs. Dad</span>
+    </div>
+    <div class="quadrant-card q4">
+      <div class="quadrant-title">⚪ Q4: Orthogonal Noise</div>
+      <div class="quadrant-desc">Baseline control group; semantically and functionally uncorrelated concepts.</div>
+      <span class="quadrant-example">Example: Cloud vs. Scissors, Doctor vs. Banana</span>
+    </div>
+    <div class="quadrant-card q2">
+      <div class="quadrant-title">⚠️ Q2: The Co-occurrence Trap</div>
+      <div class="quadrant-desc"><strong>[Distributional Blindspot]</strong> High topical co-occurrence; distinct conceptual essences.</div>
+      <span class="quadrant-example">Example: Doctor vs. Hospital, Coffee vs. Mug</span>
+    </div>
+  </div>
+  <div class="quadrant-axis-x">Statistical Co-occurrence (Topical Relatedness) ►</div>
+</div>
 
 1. **Quadrant 1 (High Similarity, Low Co-occurrence)**: Testing deep conceptual grounding (e.g., *stethoscope* / *auscultation tool*).
 2. **Quadrant 2 (Low Similarity, High Co-occurrence)**: Testing resistance against statistical co-occurrence bias (e.g., *doctor* / *hospital*, *coffee* / *cup*).

@@ -169,21 +169,123 @@
       font-size: 0.9em;
       color: #b71c1c;
     }
-    .article-content pre {
-      background-color: #202124;
-      color: #e8eaed;
-      padding: 20px;
-      border-radius: 8px;
-      overflow-x: auto;
-      font-family: 'Roboto Mono', monospace;
-      font-size: 0.9em;
-      line-height: 1.55;
-      margin: 24px 0;
+    /* Code & Highlight blocks override - Ultra High Contrast */
+    .highlighter-rouge,
+    .highlighter-rouge .highlight,
+    div.highlight,
+    figure.highlight,
+    .article-content pre,
+    .article-content pre.highlight,
+    .article-content div.highlight pre {
+      background-color: #1e1e24 !important;
+      color: #f8f9fa !important;
+      border: 1px solid #383a42 !important;
+      border-radius: 8px !important;
+      padding: 18px 20px !important;
+      overflow-x: auto !important;
+      font-family: 'Roboto Mono', monospace !important;
+      font-size: 0.92em !important;
+      line-height: 1.6 !important;
+      margin: 24px 0 !important;
     }
-    .article-content pre code {
-      background: none;
-      padding: 0;
-      color: inherit;
+    .highlighter-rouge pre,
+    .highlight pre,
+    .article-content pre code,
+    .highlighter-rouge code,
+    .highlighter-rouge pre code {
+      background: transparent !important;
+      color: #f8f9fa !important;
+      font-family: 'Roboto Mono', monospace !important;
+      text-shadow: none !important;
+    }
+    .highlight span,
+    .highlight .w,
+    .highlight .err,
+    .highlight .p {
+      color: #f8f9fa !important;
+    }
+
+    /* 2x2 Quadrant Visual Matrix */
+    .quadrant-wrapper {
+      margin: 32px 0;
+      padding: 24px;
+      background: #fafbfc;
+      border: 1px solid #dadce0;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    }
+    .quadrant-axis-y {
+      text-align: center;
+      font-weight: 700;
+      color: #1a73e8;
+      font-size: 0.95em;
+      margin-bottom: 16px;
+      letter-spacing: 0.5px;
+    }
+    .quadrant-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .quadrant-card {
+      padding: 18px 20px;
+      border-radius: 10px;
+      border: 2px solid transparent;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    }
+    .quadrant-card.q1 {
+      background: #e6f4ea;
+      border-color: #34a853;
+      color: #137333;
+    }
+    .quadrant-card.q2 {
+      background: #fce8e6;
+      border-color: #ea4335;
+      color: #c5221f;
+    }
+    .quadrant-card.q3 {
+      background: #e8f0fe;
+      border-color: #4285f4;
+      color: #1a73e8;
+    }
+    .quadrant-card.q4 {
+      background: #f1f3f4;
+      border-color: #bdc1c6;
+      color: #3c4043;
+    }
+    .quadrant-title {
+      font-weight: 700;
+      font-size: 1.05em;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .quadrant-desc {
+      font-size: 0.9em;
+      margin-bottom: 10px;
+      line-height: 1.45;
+    }
+    .quadrant-example {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.85em;
+      font-weight: 600;
+      background: rgba(255,255,255,0.85);
+      padding: 4px 8px;
+      border-radius: 4px;
+      display: inline-block;
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+    .quadrant-axis-x {
+      text-align: right;
+      font-weight: 700;
+      color: #ea4335;
+      font-size: 0.95em;
+      margin-top: 16px;
+      letter-spacing: 0.5px;
+    }
+    @media (max-width: 650px) {
+      .quadrant-grid { grid-template-columns: 1fr; }
     }
     .site-footer {
       padding: 60px 0 40px;
