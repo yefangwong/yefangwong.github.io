@@ -226,41 +226,8 @@ layout: none
       z-index: 9999;
       transition: width 0.1s ease-out;
     }
-    .copy-code-btn {
-      position: absolute;
-      top: 8px;
-      right: 12px;
-      width: 100px;
-      height: 28px;
-      line-height: 26px;
-      padding: 0 !important;
-      font-size: 0.82em !important;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
-      font-weight: 500;
-      text-align: center;
-      background: rgba(255, 255, 255, 0.12);
-      color: #e0e0e0;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
-      z-index: 10;
-      backdrop-filter: blur(4px);
-      box-sizing: border-box !important;
-    }
-    .copy-code-btn:hover {
-      background: var(--google-blue);
-      border-color: var(--google-blue);
-      color: #fff;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.25);
-    }
-    .copy-code-btn.copied {
-      background: #34a853 !important;
-      border-color: #34a853 !important;
-      color: #fff !important;
-    }
-    /* Code & Highlight blocks override - Ultra High Contrast & RWD Fix */
-    .highlighter-rouge {
+    /* Code Header Bar & Copy Code Snippet Button UI */
+    .highlighter-rouge, div.highlight {
       position: relative !important;
       background-color: #1e1e24 !important;
       border: 1px solid #383a42 !important;
@@ -269,6 +236,52 @@ layout: none
       max-width: 100% !important;
       box-sizing: border-box !important;
       overflow: hidden !important;
+    }
+    .code-header-bar {
+      display: flex !important;
+      justify-content: space-between !important;
+      align-items: center !important;
+      background-color: #15151a !important;
+      border-bottom: 1px solid #2d2d35 !important;
+      padding: 6px 12px !important;
+      font-family: 'Roboto Mono', monospace !important;
+      font-size: 0.8em !important;
+      user-select: none;
+    }
+    .code-lang-label {
+      color: #9da5b4 !important;
+      font-weight: 700 !important;
+      letter-spacing: 0.5px !important;
+      text-transform: uppercase !important;
+      font-size: 0.85em !important;
+    }
+    .copy-code-btn {
+      position: static !important;
+      width: 96px !important;
+      height: 26px !important;
+      line-height: 24px !important;
+      padding: 0 !important;
+      font-size: 0.82em !important;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+      font-weight: 500 !important;
+      text-align: center !important;
+      background: rgba(255, 255, 255, 0.12) !important;
+      color: #e0e0e0 !important;
+      border: 1px solid rgba(255, 255, 255, 0.2) !important;
+      border-radius: 5px !important;
+      cursor: pointer !important;
+      transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease !important;
+      box-sizing: border-box !important;
+    }
+    .copy-code-btn:hover {
+      background: var(--google-blue) !important;
+      border-color: var(--google-blue) !important;
+      color: #fff !important;
+    }
+    .copy-code-btn.copied {
+      background: #34a853 !important;
+      border-color: #34a853 !important;
+      color: #fff !important;
     }
     .highlighter-rouge .highlight,
     .highlighter-rouge div.highlight,
@@ -285,7 +298,7 @@ layout: none
       background-color: #1e1e24 !important;
       color: #f8f9fa !important;
       border: none !important;
-      padding: 44px 18px 16px 18px !important;
+      padding: 16px 18px !important;
       margin: 0 !important;
       overflow-x: auto !important;
       -webkit-overflow-scrolling: touch;
@@ -539,18 +552,49 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    // 1. Copy Code Snippet Buttons
-    var codeBlocks = document.querySelectorAll(".highlighter-rouge, div.highlight");
-    codeBlocks.forEach(function (block) {
+    // 1. Code Header Bar & Copy Code Snippet Buttons
+    var pres = document.querySelectorAll(".article-content pre");
+    pres.forEach(function (pre) {
+      var container = pre.closest(".highlighter-rouge, div.highlight") || pre.parentElement;
+      if (container.classList.contains("code-block-processed")) return;
+      container.classList.add("code-block-processed");
+
+      // Extract language
+      var lang = "";
+      var code = pre.querySelector("code");
+      if (code && code.className) {
+        var match = code.className.match(/language-(\w+)/);
+        if (match) lang = match[1];
+      }
+      if (!lang && container.className) {
+        var match2 = container.className.match(/language-(\w+)/);
+        if (match2) lang = match2[1];
+      }
+
+      // Create Header Bar
+      var header = document.createElement("div");
+      header.className = "code-header-bar";
+
+      var langLabel = document.createElement("span");
+      langLabel.className = "code-lang-label";
+      langLabel.innerText = lang ? lang.toUpperCase() : "CODE";
+
       var btn = document.createElement("button");
       btn.className = "copy-code-btn";
       btn.type = "button";
       btn.innerText = "📋 複製代碼";
-      block.appendChild(btn);
+
+      header.appendChild(langLabel);
+      header.appendChild(btn);
+
+      // Insert Header Bar before pre or at top of container
+      if (container.firstChild) {
+        container.insertBefore(header, container.firstChild);
+      } else {
+        container.appendChild(header);
+      }
 
       btn.addEventListener("click", function () {
-        var pre = block.querySelector("pre");
-        if (!pre) return;
         var text = pre.innerText;
         navigator.clipboard.writeText(text).then(function () {
           btn.innerText = "✓ 已複製";
@@ -564,6 +608,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           window.dataLayer = window.dataLayer || [];
           window.dataLayer.push({
             event: "copy_code_snippet",
+            code_language: lang,
             page_path: window.location.pathname,
             page_title: document.title
           });
