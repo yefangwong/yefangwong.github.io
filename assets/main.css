@@ -528,11 +528,22 @@ img {
 }
 .article-title, .post-title, .article-content p, .post-content p, .article-content li, .article-content blockquote, .article-content code {
   max-width: 100% !important;
-  overflow-wrap: break-word !important;
+  overflow-wrap: anywhere !important;
   word-wrap: break-word !important;
   word-break: break-word !important;
 }
-mjx-container[jax="SVG"], .MathJax_Display, .mjx-chtml {
+mjx-container {
+  max-width: 100% !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  -webkit-overflow-scrolling: touch;
+  display: inline-block !important;
+  vertical-align: middle !important;
+}
+mjx-container[jax="SVG"][display="true"],
+mjx-container[jax="CHTML"][display="true"],
+.MathJax_Display, .mjx-chtml {
+  display: block !important;
   max-width: 100% !important;
   overflow-x: auto !important;
   overflow-y: hidden !important;
