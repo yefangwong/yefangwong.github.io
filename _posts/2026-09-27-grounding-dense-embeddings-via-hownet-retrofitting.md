@@ -8,7 +8,7 @@ author: "Ye-Fang Wong (翁藝芳)"
 lang: zh
 ---
 
-> 🌐 **Language / 語言切換**: **繁體中文 (Current)** &nbsp;•&nbsp; [English Version (科技論文英文版) →](/posts/2026-09-27-grounding-dense-embeddings-via-hownet-retrofitting-en/)
+> 🌐 **Language / 語言切換**: **繁體中文 (Current)** &nbsp;•&nbsp; [English Version →](/posts/2026-09-27-grounding-dense-embeddings-via-hownet-retrofitting-en/)
 
 > **摘要 (Executive Summary)**：  
 > 當前大語言模型（LLM）與稠密檢索模型（Dense Retrieval，如 BGE、OpenAI text-embedding）皆建立在分佈假說（Distributional Hypothesis）之上。然而，純統計共現使得稠密向量深受「世界表象之困」——無法在幾何空間中有效分離「概念本質真正相似（Genuine Similarity）」與「語境同框關聯（Relatedness）」。  
