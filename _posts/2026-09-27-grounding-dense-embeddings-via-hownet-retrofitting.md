@@ -5,6 +5,7 @@ date: 2026-09-27 21:00:00 +0800
 categories: [AI, NLP, Neuro-Symbolic]
 tags: [Retrofitting, HowNet, BGE, Dense-Embedding, Outlines, Responsible-AI]
 author: "Ye-Fang Wong (翁藝芳)"
+lang: zh
 ---
 
 > 🌐 **Language / 語言切換**: **繁體中文 (Current)** &nbsp;•&nbsp; [English Version (科技論文英文版) →](/posts/2026-09-27-grounding-dense-embeddings-via-hownet-retrofitting-en/)

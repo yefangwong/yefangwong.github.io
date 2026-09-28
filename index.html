@@ -102,12 +102,14 @@ layout: none
       <h2 class="post-list-heading">Technical Logs (Archived)</h2>
       <ul class="post-list">
         {% for post in site.posts %}
+          {% if post.lang == 'en' or post.path contains '-en' %}
           <li>
             <span class="post-meta">{{ post.date | date: "%b %d, %Y" }}</span>
             <a class="post-link" href="{{ post.url | relative_url }}">
               {{ post.title | escape }}
             </a>
           </li>
+          {% endif %}
         {% endfor %}
       </ul>
     </section>
