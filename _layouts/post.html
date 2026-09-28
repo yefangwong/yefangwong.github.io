@@ -529,7 +529,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <span>✍️ {{ page.author | default: "Ye-Fang Wong (翁藝芳)" }}</span>
         {% assign word_count = content | strip_html | number_of_words %}
         {% assign read_time = word_count | divided_by: 200 | plus: 1 %}
-        <span>⏱️ 約 {{ read_time }} 分鐘閱讀 • 深度研讀</span>
+        {% assign is_en = false %}
+        {% if page.lang == 'en' or page.url contains '-en' %}
+          {% assign is_en = true %}
+        {% endif %}
+        {% if is_en %}
+          <span>⏱️ ~{{ read_time }} min read • In-Depth Research</span>
+        {% else %}
+          <span>⏱️ 約 {{ read_time }} 分鐘閱讀 • 深度研讀</span>
+        {% endif %}
         <span>🏷️ {{ page.tags | join: ", " }}</span>
       </div>
     </header>
@@ -552,6 +560,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
+    var isEnglish = {% if is_en %}true{% else %}false{% endif %};
+    var copyBtnLabel = isEnglish ? "📋 Copy" : "📋 複製代碼";
+    var copiedBtnLabel = isEnglish ? "✓ Copied" : "✓ 已複製";
+
     // 1. Code Header Bar & Copy Code Snippet Buttons
     var pres = document.querySelectorAll(".article-content pre");
     pres.forEach(function (pre) {
@@ -582,7 +594,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       var btn = document.createElement("button");
       btn.className = "copy-code-btn";
       btn.type = "button";
-      btn.innerText = "📋 複製代碼";
+      btn.innerText = copyBtnLabel;
 
       header.appendChild(langLabel);
       header.appendChild(btn);
@@ -597,10 +609,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       btn.addEventListener("click", function () {
         var text = pre.innerText;
         navigator.clipboard.writeText(text).then(function () {
-          btn.innerText = "✓ 已複製";
+          btn.innerText = copiedBtnLabel;
           btn.classList.add("copied");
           setTimeout(function () {
-            btn.innerText = "📋 複製代碼";
+            btn.innerText = copyBtnLabel;
             btn.classList.remove("copied");
           }, 2000);
 
