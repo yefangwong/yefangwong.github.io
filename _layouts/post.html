@@ -17,6 +17,15 @@ layout: none
   <title>{{ page.title }} | Ye-Fang Wong</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ '/assets/main.css' | relative_url }}?v={{ 'now' | date: '%s' }}">
+  {% if page.url contains '-en' %}
+    {% assign zh_url = page.url | replace: '-en/', '/' %}
+    <link rel="alternate" hreflang="zh-TW" href="{{ zh_url | absolute_url }}" />
+    <link rel="alternate" hreflang="en" href="{{ page.url | absolute_url }}" />
+  {% else %}
+    {% assign en_url = page.url | replace: '/$', '-en/' %}
+    <link rel="alternate" hreflang="zh-TW" href="{{ page.url | absolute_url }}" />
+    <link rel="alternate" hreflang="en" href="{{ en_url | absolute_url }}" />
+  {% endif %}
   <!-- MathJax for crystal clear mathematical equations -->
   <script>
     MathJax = {
@@ -206,8 +215,47 @@ layout: none
       font-size: 0.9em;
       color: #b71c1c;
     }
+    /* Reading Progress Bar & Copy Code Snippet Button UI */
+    #reading-progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3.5px;
+      background: linear-gradient(90deg, #4285F4, #34A853);
+      width: 0%;
+      z-index: 9999;
+      transition: width 0.1s ease-out;
+    }
+    .copy-code-btn {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      background: rgba(255, 255, 255, 0.15);
+      color: #f8f9fa;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 4px;
+      padding: 4px 10px;
+      font-size: 0.78em;
+      font-family: 'Roboto Mono', monospace;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      z-index: 10;
+      backdrop-filter: blur(4px);
+    }
+    .copy-code-btn:hover {
+      background: var(--google-blue);
+      border-color: var(--google-blue);
+      color: #fff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+    .copy-code-btn.copied {
+      background: #34a853 !important;
+      border-color: #34a853 !important;
+      color: #fff !important;
+    }
     /* Code & Highlight blocks override - Ultra High Contrast & RWD Fix */
     .highlighter-rouge {
+      position: relative !important;
       background-color: #1e1e24 !important;
       border: 1px solid #383a42 !important;
       border-radius: 8px !important;
@@ -436,6 +484,7 @@ layout: none
   </style>
 </head>
 <body>
+<div id="reading-progress-bar"></div>
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NKTF823T"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -459,6 +508,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="article-meta">
         <span>📅 {{ page.date | date: "%Y-%m-%d" }}</span>
         <span>✍️ {{ page.author | default: "Ye-Fang Wong (翁藝芳)" }}</span>
+        {% assign word_count = content | strip_html | number_of_words %}
+        {% assign read_time = word_count | divided_by: 200 | plus: 1 %}
+        <span>⏱️ 約 {{ read_time }} 分鐘閱讀 • 深度研讀</span>
         <span>🏷️ {{ page.tags | join: ", " }}</span>
       </div>
     </header>
@@ -478,6 +530,101 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <p>Taipei, Taiwan • Building Responsible AI & High-Assurance Systems</p>
   </div>
 </footer>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // 1. Copy Code Snippet Buttons
+    var codeBlocks = document.querySelectorAll(".highlighter-rouge, div.highlight");
+    codeBlocks.forEach(function (block) {
+      var btn = document.createElement("button");
+      btn.className = "copy-code-btn";
+      btn.type = "button";
+      btn.innerText = "📋 複製代碼";
+      block.appendChild(btn);
+
+      btn.addEventListener("click", function () {
+        var pre = block.querySelector("pre");
+        if (!pre) return;
+        var text = pre.innerText;
+        navigator.clipboard.writeText(text).then(function () {
+          btn.innerText = "✓ 已複製";
+          btn.classList.add("copied");
+          setTimeout(function () {
+            btn.innerText = "📋 複製代碼";
+            btn.classList.remove("copied");
+          }, 2000);
+
+          // Push GA4 / GTM event
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: "copy_code_snippet",
+            page_path: window.location.pathname,
+            page_title: document.title
+          });
+        }).catch(function (err) {
+          console.error("Copy failed:", err);
+        });
+      });
+    });
+
+    // 2. Scroll Progress Bar & Milestone Tracking (25%, 50%, 75%, 90%)
+    var milestones = [25, 50, 75, 90];
+    var reachedMilestones = {};
+
+    function handleScroll() {
+      var winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+      var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      if (height <= 0) return;
+      var scrolled = (winScroll / height) * 100;
+
+      // Update progress bar
+      var progressBar = document.getElementById("reading-progress-bar");
+      if (progressBar) {
+        progressBar.style.width = Math.min(scrolled, 100) + "%";
+      }
+
+      // Check milestones
+      milestones.forEach(function (m) {
+        if (scrolled >= m && !reachedMilestones[m]) {
+          reachedMilestones[m] = true;
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: "scroll_depth_milestone",
+            percent_scrolled: m,
+            page_path: window.location.pathname,
+            page_title: document.title
+          });
+        }
+      });
+    }
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    // 3. Outbound Link & Language Switch Tracking
+    document.addEventListener("click", function (e) {
+      var link = e.target.closest("a");
+      if (!link) return;
+      var href = link.getAttribute("href") || "";
+
+      window.dataLayer = window.dataLayer || [];
+      if (href.includes("github.com") || href.includes("arxiv.org")) {
+        window.dataLayer.push({
+          event: "click_outbound_link",
+          destination_url: href,
+          link_text: link.innerText.trim(),
+          page_path: window.location.pathname
+        });
+      } else if (href.includes("/posts/") && (href.includes("-en/") || link.innerText.includes("English") || link.innerText.includes("繁體中文"))) {
+        window.dataLayer.push({
+          event: "switch_language",
+          destination_url: href,
+          link_text: link.innerText.trim(),
+          page_path: window.location.pathname
+        });
+      }
+    });
+  });
+</script>
 
 </body>
 </html>
