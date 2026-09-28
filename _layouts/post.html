@@ -42,12 +42,18 @@ layout: none
       background-color: #fff;
       margin: 0;
       padding: 0;
-      overflow-x: hidden;
-      max-width: 100%;
+      overflow-x: hidden !important;
+      max-width: 100% !important;
+      width: 100% !important;
       -webkit-font-smoothing: antialiased;
     }
+    main, article, .article-content, .wrapper {
+      max-width: 100% !important;
+      box-sizing: border-box !important;
+      min-width: 0 !important;
+    }
     .wrapper {
-      max-width: 860px;
+      max-width: 860px !important;
       margin: 0 auto;
       padding: 0 24px;
       box-sizing: border-box;

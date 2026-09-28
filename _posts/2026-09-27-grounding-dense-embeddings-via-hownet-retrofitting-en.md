@@ -121,19 +121,18 @@ Applying HowNet-guided retrofitting to BGE embeddings yields the following exper
 | **Quadrant 2 (Contextual Noise)** | 0.5505 | 0.4259 | **0.6427** | Anchored |
 | **Separation Gap ($\Delta = Q_1 - Q_2$)** | +0.0825 | +0.4630 | **+0.3181** | **3.86x Expansion** |
 | **Two-Sample t-statistic** | $t = 1.3183$ | $t = 6.9281$ | **$t = 7.3428$** | **Superior to Symbolic Prior** |
-| **Two-Tailed p-value** | $p = 0.2239$ | $p = 0.000121$ | **$p = 0.000080$ ($8.0 	imes 10^{-5}$)** | **$p < 10^{-4}$ Extreme Significance** ✅ |
+| **Two-Tailed p-value** | $p = 0.2239$ | $p = 0.000121$ | **$p = 0.000080$ ($8.0 \times 10^{-5}$)** | **$p < 10^{-4}$ Extreme Significance** ✅ |
 
 ```
 Distributional vs. Retrofitted Separation Dynamics:
 
 Baseline BGE:
 Q2 [==== 0.5505 ====>]
-Q1 [======= 0.6330 =======>]  (Gap: 0.0825, Overlap, p = 0.2239 ❌)
+Q1 [======= 0.6330 =======>] (Overlap, p = 0.2239 ❌)
 
 Retrofitted with HowNet Sememes:
 Q2 [======= 0.6427 =======>]
-Q1 [=========================== 0.9608 ===========================>] 
-                              (Gap: 0.3181, t = 7.3428, p = 0.000080 ✅)
+Q1 [================ 0.9608 ===============>] (p = 0.000080 ✅)
 ```
 
 The empirical results demonstrate a decisive leap: the two-tailed p-value drops from $0.2239$ to $0.000080$—a shift across more than three orders of magnitude. The retrofitted vector space cleanly separates concept essence from contextual accident.
@@ -153,7 +152,7 @@ Our analysis reveals three primary geometric factors:
    To push $Q_2$ below $0.25$, we must introduce a margin-based repulsive objective (Mrkšić et al., 2016, *Counter-fitting Word Vectors to Linguistic Constraints*):
    
    $$
-   \Omega_{rep}(q_i, q_k) = \max(0, \, 	au - \|q_i - q_k\|^2)
+   \Omega_{rep}(q_i, q_k) = \max(0, \, \tau - \|q_i - q_k\|^2)
    $$
 
    Enforcing repulsive constraints over antonyms and purely functional relations constitutes our immediate subsequent research direction (`BRANCH-05A` in our Discovery Tree).
@@ -165,26 +164,22 @@ Our analysis reveals three primary geometric factors:
 Offline vector retrofitting addresses the representation manifold. To guarantee zero hallucination during token generation, we integrate this grounded space with **Outlines FSM-guided decoding** (Willard & Louf, 2023):
 
 ```
-                        Dual-Track Defense Architecture
-
-┌────────────────────────────────────────────────────────────────────────┐
-│ [Track A: Input & Retrieval Layer]                                     │
-│ User Query ──► [HowNet Retrofitted HNSW Index] ──► Top-K Concepts      │
-│                (Guaranteed Zero Co-occurrence Drift)                   │
-└───────────────────────────────────┬────────────────────────────────────┘
-                                    │ Grounded Context
-                                    ▼
-┌────────────────────────────────────────────────────────────────────────┐
-│ [Track B: Token Generation Layer]                                      │
-│ Prompt + Context ──► [LLM Logits Processor] ◄── [Outlines FSM Mask]    │
-│                      (Token Decoding Constrained to Deterministic AST) │
-└───────────────────────────────────┬────────────────────────────────────┘
-                                    │ Validated SQL / Code
-                                    ▼
-┌────────────────────────────────────────────────────────────────────────┐
-│ [Track C: Execution Boundary]                                          │
-│ [llm-sql-guard AST Validator] ──► [Zero Unauthorized Execution Engine] │
-└────────────────────────────────────────────────────────────────────────┘
+┌────────────────────────────────────────┐
+│ [Track A: Input & Retrieval Layer]     │
+│ User Query ──► [Retrofitted HNSW]      │
+└───────────────────┬────────────────────┘
+                    │ Grounded Context
+                    ▼
+┌────────────────────────────────────────┐
+│ [Track B: Token Generation Layer]      │
+│ LLM 推論 ──► [Outlines FSM Mask]       │
+└───────────────────┬────────────────────┘
+                    │ Validated Code
+                    ▼
+┌────────────────────────────────────────┐
+│ [Track C: Execution Boundary]          │
+│ [llm-sql-guard AST Validator] ──► Pass │
+└────────────────────────────────────────┘
 ```
 
 By coupling **input-side manifold grounding (Retrofitting)** with **output-side transition constraints (Outlines FSM)** and **execution-side AST auditing (`llm-sql-guard`)**, we establish a comprehensive, end-to-end neuro-symbolic defense architecture.

@@ -507,7 +507,13 @@ table {
 /* Global RWD & Mobile Protection Rules */
 html, body {
   max-width: 100% !important;
+  width: 100% !important;
   overflow-x: hidden !important;
+}
+main, article, .article-content, .post-content, .wrapper {
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  min-width: 0 !important;
 }
 img {
   max-width: 100% !important;
@@ -520,8 +526,10 @@ img {
   margin: 24px auto;
   border-radius: 8px;
 }
-.article-title, .post-title, .article-content p, .article-content code {
+.article-title, .post-title, .article-content p, .post-content p, .article-content li, .article-content blockquote, .article-content code {
+  max-width: 100% !important;
   overflow-wrap: break-word !important;
+  word-wrap: break-word !important;
   word-break: break-word !important;
 }
 mjx-container[jax="SVG"], .MathJax_Display, .mjx-chtml {
