@@ -7,7 +7,7 @@ tags: [Retrofitting, HowNet, BGE, Dense-Embedding, Outlines, Responsible-AI, Sci
 author: "Ye-Fang Wong (翁藝芳)"
 ---
 
-> 🌐 **Language / 語言切換**: [繁體中文版 (Traditional Chinese) ←](/posts/2026-09-27-grounding-dense-embeddings-via-hownet-retrofitting/) | **English (Current)**
+> 🌐 **Language / 語言切換**: [繁體中文版 (Traditional Chinese) ←](/posts/2026-09-27-grounding-dense-embeddings-via-hownet-retrofitting/) &nbsp;•&nbsp; **English (Current)**
 
 > **Abstract (Executive Summary)**:  
 > Contemporary large language models (LLMs) and dense retrieval architectures rely fundamentally on Firth’s distributional hypothesis. However, representations relying exclusively on statistical co-occurrence suffer from an epistemological trap: they fail to separate genuine conceptual similarity from contextual relatedness within continuous metric spaces.  
@@ -84,7 +84,8 @@ Following Faruqui et al. (NAACL 2015), we model vocabulary grounding as inferenc
 We formulate the objective function to minimize two competing penalties:
 
 $$
-\Psi(Q) = \sum_{i=1}^{|V|} \left[ lpha_i \|q_i - \hat{q}_i\|^2 + \sum_{(i, j) \in E} eta_{ij} \|q_i - q_j\|^2 ight]
+\Psi(Q) = \sum_{i=1}^{|V|} \left[ lpha_i \|q_i - \hat{q}_i\|^2 + \sum_{(i, j) \in E} eta_{ij} \|q_i - q_j\|^2 
+ight]
 $$
 
 where:
