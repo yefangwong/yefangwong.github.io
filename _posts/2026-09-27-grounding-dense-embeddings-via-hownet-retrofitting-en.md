@@ -142,21 +142,28 @@ The empirical results demonstrate a decisive leap: the two-tailed p-value drops 
 
 ## 🧐 6. Critical Analysis: Why Does Q2 Remain at 0.6427?
 
-While the $t$-test confirms extreme statistical separation, an essential engineering question arises: **Why does $Q_2$ still exhibit a cosine similarity of $0.6427$?**
+Upon observing these empirical results, a key research question arises: **Why does $Q_2$ (topically related pairs) still exhibit a substantial cosine similarity of $0.6427$?**
 
-Our analysis reveals three primary geometric factors:
-1. **Attractive-Only Force Dynamics**:  
-   The classical Faruqui objective functions as an attractive spring network. While pulling sememe-sharing words together, it applies zero explicit repulsive force to unrelated words that co-occurred in the baseline space.
-2. **High-Dimensional Geometry and Hubness**:  
-   In 1024-dimensional space, dense neural representations reside on a narrow hyperspherical cone. Random or topically related vectors typically have a baseline cosine similarity around $0.50 \sim 0.60$.
-3. **The Frontier: Counter-Fitting Repulsive Loss**:  
-   To push $Q_2$ below $0.25$, we must introduce a margin-based repulsive objective (Mrkšić et al., 2016, *Counter-fitting Word Vectors to Linguistic Constraints*):
-   
-   $$
-   \Omega_{rep}(q_i, q_k) = \max(0, \, \tau - \|q_i - q_k\|^2)
-   $$
+Addressing this question, AI (Gemini 3.6 Flash) formulated three potential geometric and topological hypotheses that remain to be empirically verified:
 
-   Enforcing repulsive constraints over antonyms and purely functional relations constitutes our immediate subsequent research direction (`BRANCH-05A` in our Discovery Tree).
+1. **High-Dimensional Geometry and Anisotropy (Cone Effect)**:  
+   Dense embeddings from Transformer architectures suffer from representation anisotropy—vectors are constrained within a narrow hyperspherical cone, creating an intrinsic baseline cosine noise floor around $0.35 \sim 0.45$.
+2. **Attractive-Only Force Dynamics**:  
+   The classical Faruqui objective functions strictly as an attractive spring network ($\beta_{ij} \|q_i - q_j\|^2$). While pulling sememe-sharing pairs closer, it exerts no explicit repulsive force to push topically co-occurring yet non-synonymous pairs apart.
+3. **2-Hop Indirect Graph Propagation**:  
+   In HowNet, co-occurring pairs like *doctor* and *hospital* or *cat* and *mouse* share broader hypernyms (e.g., `{animal|動物}`), creating indirect 2-hop attraction across the undirected sememe graph.
+
+### 🔬 Future Research Directions
+
+To suppress $Q_2$ similarity below $0.25$, subsequent work can explore two promising avenues:
+
+* **Counter-Fitting Margin-Based Repulsive Loss**:  
+  Integrating a margin-based repulsive objective (Mrkšić et al., 2016) over antonyms and purely functional relations:
+  $$
+  \Omega_{rep}(q_i, q_k) = \max(0, \, \tau - \|q_i - q_k\|^2)
+  $$
+* **Poincaré Hyperbolic Embeddings**:  
+  Mapping ontological hierarchies into hyperbolic space (Poincaré Disk) to natively preserve tree-structured conceptual distances without geometric distortion.
 
 ---
 
@@ -173,7 +180,7 @@ Offline vector retrofitting addresses the representation manifold. To guarantee 
                     ▼
 ┌────────────────────────────────────────┐
 │ [Track B: Token Generation Layer]      │
-│ LLM 推論 ──► [Outlines FSM Mask]       │
+│ LLM Inference ──► [Outlines FSM Mask]  │
 └───────────────────┬────────────────────┘
                     │ Validated Code
                     ▼
@@ -187,11 +194,11 @@ By coupling **input-side manifold grounding (Retrofitting)** with **output-side 
 
 ---
 
-## 🎯 8. Epistemological Takeaways
+## 🎯 8. Concluding Remarks: Humanistic Care as the Ultimate Anchor
 
-1. **Distributional Co-occurrence is Not Semantic Essence**: Pure statistical word co-occurrence cannot reliably distinguish similarity from relatedness. Ontological priors are indispensable.
-2. **Decoupled Retrofitting is High-Leverage**: Retrofitting enables modular, compute-efficient grounding without requiring multi-million-dollar pre-training cycles.
-3. **Statistical Rigor Protects Engineering Decisions**: Hypotheses must be validated against rigorous statistical metrics ($t$-tests, $p$-values, effect sizes) rather than subjective spot checks.
+From proposing *Cross-Lingual Information Retrieval Systems Linking Bilingual Ontologies and Domain Semantics* in 2005 to validating the integration of dense neural embeddings with HowNet sememes ($p = 0.000080$) in 2026, this endeavor represents far more than an algorithmic experiment—it is a two-decade journey rooted in deep humanistic care.
+
+Amidst the emerging paradigm of Recursive Self-Improvement (RSI), I firmly believe that the ultimate value of technology lies in humanistic understanding. Bridging neural representations with symbolic knowledge is not merely a pursuit of mathematical precision or geometric alignment; it is a fundamental effort to enable AI to truly comprehend, recognize, and empathize with human concepts and language—elevating AI beyond a mere stochastic and statistical machine.
 
 ---
 
