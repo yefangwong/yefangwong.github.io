@@ -92,23 +92,21 @@ Following Faruqui et al. (NAACL 2015), we model vocabulary grounding as inferenc
 We formulate the objective function to minimize two competing penalties:
 
 $$
-\Psi(Q) = \sum_{i=1}^{|V|} \left[ lpha_i \|q_i - \hat{q}_i\|^2 + \sum_{(i, j) \in E} eta_{ij} \|q_i - q_j\|^2 
-ight]
+\Psi(Q) = \sum_{i=1}^{|V|} \left[ \alpha_i \|q_i - \hat{q}_i\|^2 + \sum_{(i, j) \in E} \beta_{ij} \|q_i - q_j\|^2 \right]
 $$
 
 where:
-1. **Fidelity Loss ($lpha_i \|q_i - \hat{q}_i\|^2$)**: Penalizes deviations from the distributional initialization, preserving rich contextual semantics.
-2. **Relational Graph Loss ($eta_{ij} \|q_i - q_j\|^2$)**: Pulls ontologically linked words closer within the geometric space.
+1. **Fidelity Loss ($\alpha_i \|q_i - \hat{q}_i\|^2$)**: Penalizes deviations from the distributional initialization, preserving rich contextual semantics.
+2. **Relational Graph Loss ($\beta_{ij} \|q_i - q_j\|^2$)**: Pulls ontologically linked words closer within the geometric space.
 
 ### The Decoupling Principle (Faruqui et al., 2015)
 A crucial insight emphasized by Faruqui et al. is that **this formulation makes no assumptions about how the input vectors were constructed**. Decoupling ontological grounding from compute-intensive pre-training enables retrofitting to execute as an ultra-fast, post-processing optimization step requiring seconds rather than days.
 
-Taking the partial derivative $rac{\partial \Psi}{\partial q_i} = 0$ yields an exact, closed-form coordinate ascent update rule:
+Taking the partial derivative $\frac{\partial \Psi}{\partial q_i} = 0$ yields an exact, closed-form coordinate ascent update rule:
 
 $$
-q_i = rac{lpha_i \hat{q}_i + \sum_{j \in N(i)} eta_{ij} q_j}{lpha_i + \sum_{j \in N(i)} eta_{ij}}
+q_i = \frac{\alpha_i \hat{q}_i + \sum_{j \in N(i)} \beta_{ij} q_j}{\alpha_i + \sum_{j \in N(i)} \beta_{ij}}
 $$
-
 Because the objective is strictly convex, coordinate ascent guarantees monotonic convergence to the global optimum within 10 iterations.
 
 ---
