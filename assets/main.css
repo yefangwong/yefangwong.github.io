@@ -503,3 +503,77 @@ table {
     color: #008080; }
   .highlight .il {
     color: #099; }
+
+/* Global RWD & Mobile Protection Rules */
+html, body {
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+}
+img {
+  max-width: 100% !important;
+  height: auto !important;
+}
+.article-content img, .post-content img {
+  max-width: 100% !important;
+  height: auto !important;
+  display: block;
+  margin: 24px auto;
+  border-radius: 8px;
+}
+.article-title, .post-title, .article-content p, .article-content code {
+  overflow-wrap: break-word !important;
+  word-break: break-word !important;
+}
+mjx-container[jax="SVG"], .MathJax_Display, .mjx-chtml {
+  max-width: 100% !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  -webkit-overflow-scrolling: touch;
+}
+.highlighter-rouge {
+  background-color: #1e1e24 !important;
+  border: 1px solid #383a42 !important;
+  border-radius: 8px !important;
+  margin: 24px 0 !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+}
+.highlighter-rouge .highlight,
+.highlighter-rouge div.highlight,
+.highlighter-rouge figure.highlight {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+.article-content pre,
+.highlighter-rouge pre,
+.highlighter-rouge pre.highlight,
+.highlighter-rouge div.highlight pre {
+  background-color: #1e1e24 !important;
+  color: #f8f9fa !important;
+  border: none !important;
+  padding: 16px 18px !important;
+  margin: 0 !important;
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch;
+  font-family: 'Roboto Mono', monospace !important;
+  font-size: 0.9em !important;
+  line-height: 1.6 !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  white-space: pre !important;
+  word-break: normal !important;
+}
+@media (max-width: 768px) {
+  .wrapper { padding-left: 16px !important; padding-right: 16px !important; }
+  .article-content table, .post-content table {
+    display: block !important;
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+  }
+}
+
