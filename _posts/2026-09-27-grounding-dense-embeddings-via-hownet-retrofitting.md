@@ -7,6 +7,8 @@ tags: [Retrofitting, HowNet, BGE, Dense-Embedding, Outlines, Responsible-AI]
 author: "Ye-Fang Wong (翁藝芳)"
 ---
 
+> 🌐 **Language / 語言切換**: **繁體中文 (Current)** | [English Version (科技論文英文版) →](/posts/2026-09-27-grounding-dense-embeddings-via-hownet-retrofitting-en/)
+
 > **摘要 (Executive Summary)**：  
 > 當前大語言模型（LLM）與稠密檢索模型（Dense Retrieval，如 BGE、OpenAI text-embedding）皆建立在分佈假說（Distributional Hypothesis）之上。然而，純統計共現使得稠密向量深受「世界表象之困」——無法在幾何空間中有效分離「概念本質真正相似（Genuine Similarity）」與「語境同框關聯（Relatedness）」。  
 > 本文記錄我們在實驗室針對 BGE-large-zh 稠密向量進行的終極假說檢定：原始向量在真相似 Q1（0.6330）與語境同框 Q2（0.5505）之間，雙樣本 t 檢定為 $t = 1.3183, p = 0.2239$（統計上無法分離）。我們引入董振東先生知網（HowNet 2,089 義原圖譜）作為符號流形先驗，結合 Manaal Faruqui et al. 2015 的馬可夫隨機場凸二次規劃與座標上升閉式解進行後微調（Retrofitting）。  
