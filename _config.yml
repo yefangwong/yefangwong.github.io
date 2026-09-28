@@ -1,0 +1,10 @@
+title: "Ye-Fang Wong | Senior AI Solution Architect"
+email: "yefang.wong@gmail.com"
+description: "Senior Solution Architect specializing in Responsible AI Guardrails and Mission-Critical Backend Infrastructures."
+baseurl: ""
+url: "https://yefangwong.github.io"
+permalink: /posts/:year-:month-:day-:title/
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
